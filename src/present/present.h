@@ -17,7 +17,7 @@
 
 
     //
-    u32_t * keyScheduling( u32_t key );
+    u32_t * keyScheduling( u32_t key, u32_t * keys_24, u128_t * keys_80  );
 
     //
     u32_t permutation( u32_t m );

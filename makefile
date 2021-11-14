@@ -7,13 +7,17 @@ FLAG_OPTI = -O3 -finline-functions -funroll-loops -march=native -mtune=native -f
 DEBUG_FLAG = -g #-fsanitize=address
 LFLAGS= -lm #-lpthread
 
-FLAG = $(DEBUG_FLAG)
+FLAG = $(FLAG_OPTI)
 
 all : present24
 
 ##
 main : src/main.c
 	$(GCC) -c $(FLAG) "src/main.c" -o builds/main.out
+
+##
+sort : src/sort/sort.c
+	$(GCC) -c $(FLAG) "src/sort/sort.c" -o builds/sort.out
 
 ##
 keys : src/present/keys.c
@@ -26,13 +30,13 @@ decryption : src/present/decryption.c
 	$(GCC) -c $(FLAG) "src/present/decryption.c" -o builds/decryption.out
 
 ##
-#attack.out : src/attack/decryption.c
-#	$(CC) -c $(FLAG) "src/present/decryption.c" -o builds/decryption.out
+attack : src/attack/attack.c
+	$(GCC) -c $(FLAG) "src/attack/attack.c" -o builds/attack.out
 
 
 
-present24 : main keys encryption decryption
-	$(GCC) -o test.out $(FLAG) builds/main.out builds/keys.out builds/encryption.out builds/decryption.out  $(LFLAGS)
+present24 : main keys encryption decryption attack sort
+	$(GCC) -o present.out $(FLAG) builds/main.out builds/keys.out builds/encryption.out builds/decryption.out builds/attack.out builds/sort.out  $(LFLAGS)
 
 
 clear :

@@ -46,9 +46,9 @@ u32_t subsitution_inv( u32_t m ){
 
 u32_t decryption_24( u32_t * keys, u32_t m ){
     u32_t state = m;
-    printf(" state  : %llx \n", (u64_t) state );
+    // printf(" state  : %llx \n", (u64_t) state );
     state = state ^ keys[ROUNDS];
-    printf(" state  : %llx \n", (u64_t) state );
+    // printf(" state  : %llx \n", (u64_t) state );
     for( int i = ROUNDS - 1 ; i >= 0; i-- ) {
         state = permutation_inv(state);
         state = subsitution_inv(state);

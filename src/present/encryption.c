@@ -47,12 +47,12 @@ u32_t encryption_24( u32_t * keys, u32_t m ){
     u32_t state = m;
     for( int i = 0; i < ROUNDS; i++ ) {
         state = state ^ keys[i];
-        printf("xor state %d : %llx \n", i+2, (u64_t) state );
+        // printf("xor state %d : %llx \n", i+2, (u64_t) state );
         state = subsitution(state);
-        printf("sub state %d : %llx \n", i+2, (u64_t) state );
+        // printf("sub state %d : %llx \n", i+2, (u64_t) state );
         state = permutation(state);
-        printf("per state %d : %llx \n", i+2, (u64_t) state );
-        printf("\n\n\n");
+        // printf("per state %d : %llx \n", i+2, (u64_t) state );
+        // printf("\n\n\n");
         
     }
     state = state ^ keys[ROUNDS];
