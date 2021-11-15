@@ -33,8 +33,8 @@ void  main(){
     printf("key1  %x - key2 %x \n", key1, key2 );
     printf("m1  %x - m2 %x \n", m1, m2 );
     printf("enc1  %x - enc2 %x \n", enc1, enc2 );
-    // attack((u32_t) 0xef333a, (u32_t) 0x250324, (u32_t)0xfb432f, (u32_t) 0xa71982);
-    attack(m1, enc1, m2, enc2);
+    attack((u32_t) 0xef333a, (u32_t) 0x250324, (u32_t)0xfb432f, (u32_t) 0xa71982);
+    // attack(m1, enc1, m2, enc2);
 
    
     

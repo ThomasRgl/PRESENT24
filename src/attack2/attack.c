@@ -2,7 +2,7 @@
 #include "attack.h"
 
 #define SIZE 0xffffff
-#define NBTHREAD 8
+#define NBTHREAD 7
 
 void attack(u32_t m1, u32_t enc1, u32_t m2, u32_t enc2){
     
@@ -37,20 +37,22 @@ void attack(u32_t m1, u32_t enc1, u32_t m2, u32_t enc2){
 
 
         args[i].start = i * threadSize;
-        args[i].end = args[i].start + threadSize;
+        args[i].end = args[i].start + threadSize - 1;
 
         args[i].num = i;
 
-        if(i == NBTHREAD)
-            args[i].end = SIZE%NBTHREAD;
+        if(i == (NBTHREAD-1))
+            args[i].end += SIZE%NBTHREAD + 1;
         
         pthread_create(&idList[i], NULL, threadAttack, &args[i] );
         // getchar()
     }
 
     pthread_barrier_wait(&barrier1);
+    printf("début tris!\n");
     pthread_barrier_wait(&barrier2);
-
+    printf("fin tris!\n");
+    
     for( size_t i = 0; i < NBTHREAD; i++){
         pthread_join(idList[i], NULL );
         printf("join! \n");
@@ -93,6 +95,7 @@ void * threadAttack( void *voidArgs){
 
     u32_t mysize = (args->end - args->start) + 1;
 
+    printf(" - start %x - end %x\n",  args->start, args->end);
 
     
     //keys 
@@ -116,7 +119,7 @@ void * threadAttack( void *voidArgs){
         dec_keys[key] = key;
         
         if((key & 0x00ffff) == 0x00ffff ){
-            printf("%x\n", key);
+            // printf("%x\n", key);
         }
     }
 
@@ -136,9 +139,10 @@ void * threadAttack( void *voidArgs){
         msg = enc_msgs[i];
         u32_t indice = dichotomie(dec_msgs, msg, SIZE);
         if(indice != 0){
-            printf("enc msg : %*llx  key: %*x\n", 10, enc_msgs[i], 10, enc_keys[i] );
+            printf("i: %x - start %x - end %x\n", i, args->start, args->end);
+            // printf("enc msg : %*llx  key: %*x\n", 10, enc_msgs[i], 10, enc_keys[i] );
             //
-            printf("%*llx - %*x\n", 10, dec_msgs[indice - 1], 10, dec_keys[indice - 1]  );
+            // printf("%*llx - %*x\n", 10, dec_msgs[indice - 1], 10, dec_keys[indice - 1]  );
 
             printf("k1: %x   k2: %x \n", enc_keys[i], dec_keys[indice - 1]);
         }
@@ -175,3 +179,5 @@ u32_t dichotomie(u64_t * tab, u64_t mot, u32_t size){
 }
 
 
+// no*n
+//(oui)*
