@@ -5,7 +5,7 @@ SFML_OUT= sfml-app.out
 # INPUT_FILE= main.cpp  Entity.cpp
 FLAG_OPTI = -O3 -finline-functions -funroll-loops -march=native -mtune=native -flto
 DEBUG_FLAG = -g #-fsanitize=address
-LFLAGS= -lm #-lpthread
+LFLAGS= -lm -lpthread
 
 FLAG = $(FLAG_OPTI)
 
@@ -33,10 +33,14 @@ decryption : src/present/decryption.c
 attack : src/attack/attack.c
 	$(GCC) -c $(FLAG) "src/attack/attack.c" -o builds/attack.out
 
+attack2 : src/attack2/attack.c
+	$(GCC) -c $(FLAG) "src/attack2/attack.c" -o builds/attack2.out
 
 
-present24 : main keys encryption decryption attack sort
+present24 : main keys encryption decryption sort attack2 attack
 	$(GCC) -o present.out $(FLAG) builds/main.out builds/keys.out builds/encryption.out builds/decryption.out builds/attack.out builds/sort.out  $(LFLAGS)
+	$(GCC) -o present2.out $(FLAG) builds/main.out builds/keys.out builds/encryption.out builds/decryption.out builds/attack2.out builds/sort.out  $(LFLAGS)
+
 
 
 clear :
