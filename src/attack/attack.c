@@ -47,12 +47,22 @@ void attack(u32_t m1, u32_t enc1, u32_t m2, u32_t enc2){
         printf("%*llx - %*x\n", 10, enc_msgs[i], 10, enc_keys[i]  );
     }
 
+
+    //
+    for(u32_t i = 0x0; i <= 0xff; i ++ ){
+        printf("%*llx - %*x\n", 10, dec_msgs[i], 10, dec_keys[i]  );
+    }
+
     u64_t msg;
     for(u32_t i = 0x0; i <= 0xffffff; i ++ ){
         msg = enc_msgs[i];
         u32_t indice = dichotomie(dec_msgs, msg, 0xffffff);
         if(indice != 0){
-            printf("k1: %x   k2: %x \n", enc_keys[i], enc_keys[indice - 1]);
+            printf("enc msg : %*llx  key: %*x\n", 10, enc_msgs[i], 10, enc_keys[i] );
+            //
+            printf("%*llx - %*x\n", 10, dec_msgs[indice - 1], 10, dec_keys[indice - 1]  );
+
+            printf("k1: %x   k2: %x \n", enc_keys[i], dec_keys[indice - 1]);
         }
     }
     
@@ -69,7 +79,7 @@ void attack(u32_t m1, u32_t enc1, u32_t m2, u32_t enc2){
 }
 
 
-u32_t dichotomie(u64_t * tab, u32_t mot, u32_t size){
+u32_t dichotomie(u64_t * tab, u64_t mot, u32_t size){
     int a = 0;
     int b = size;
     int m;
@@ -77,6 +87,7 @@ u32_t dichotomie(u64_t * tab, u32_t mot, u32_t size){
     while (a <= b){
         m = (a + b) / 2;
         if(tab[m] == mot){
+            printf("\n\n mot: %llx \t tab[m]: %llx ", mot, tab[m]);
             printf("OUI\n");
             return (u32_t) (m + 1);
             }
