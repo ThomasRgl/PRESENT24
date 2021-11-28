@@ -1,4 +1,4 @@
-#include "present.h"
+#include "../present.h"
 
 
 u32_t permutation_inv( u32_t m ){

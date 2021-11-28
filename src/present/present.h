@@ -15,6 +15,12 @@
     typedef unsigned long long u64_t ;
     typedef unsigned int u32_t;
 
+    //only for v2
+    typedef unsigned char u8_t;
+    #define R_32 (v,n)( ((v) >> (n)) | ((v) << (32  -(n))) )
+    #define R_64 (v,n)( ((v) >> (n)) | ((v) << (64  -(n))) )
+    #define R_128(v,n)( ((v) >> (n)) | ((v) << (128 -(n))) )
+
 
     //
     u32_t * keyScheduling( u32_t key, u32_t * keys_24, u128_t * keys_80  );

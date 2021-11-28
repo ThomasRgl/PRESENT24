@@ -151,7 +151,8 @@ void * threadAttack( void *voidArgs){
 
     free(keys);
     free(keys_80);
-
+    
+    return 0;
 }
 
 

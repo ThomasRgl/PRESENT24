@@ -1,5 +1,6 @@
-GCC = gcc
+GCC = clang
 
+VERSION_PRESENT = v1
 
 SFML_OUT= sfml-app.out
 # INPUT_FILE= main.cpp  Entity.cpp
@@ -20,14 +21,14 @@ sort : src/sort/sort.c
 	$(GCC) -c $(FLAG) "src/sort/sort.c" -o builds/sort.out
 
 ##
-keys : src/present/keys.c
-	$(GCC) -c $(FLAG) "src/present/keys.c" -o builds/keys.out
+keys : src/present/v1/keys.c
+	$(GCC) -c $(FLAG) "src/present/$(VERSION_PRESENT)/keys.c" -o builds/keys.out
 
-encryption : src/present/encryption.c
-	$(GCC) -c $(FLAG) "src/present/encryption.c" -o builds/encryption.out
+encryption : src/present/v1/encryption.c
+	$(GCC) -c $(FLAG) "src/present/$(VERSION_PRESENT)/encryption.c" -o builds/encryption.out
 
-decryption : src/present/decryption.c
-	$(GCC) -c $(FLAG) "src/present/decryption.c" -o builds/decryption.out
+decryption : src/present/v1/decryption.c
+	$(GCC) -c $(FLAG) "src/present/$(VERSION_PRESENT)/decryption.c" -o builds/decryption.out
 
 ##
 attack : src/attack/attack.c
