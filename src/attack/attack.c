@@ -16,12 +16,10 @@ void attack(u32_t m1, u32_t enc1, u32_t m2, u32_t enc2){
     u32_t * keys;
     keys = malloc( (ROUNDS + 1) * sizeof(u32_t) );
 
-    u128_t * keys_80;
-    keys_80 = malloc( (ROUNDS + 1) * sizeof(u128_t) );
 
     //
     for(u32_t key = 0x0; key <= 0xffffff; key ++ ){
-        keys = keyScheduling( key, keys, keys_80 );
+        keys = keyScheduling( key, keys );
         //
         enc_msgs[key] = ( ((u64_t) encryption_24(keys, m1)) << 32) | ((u64_t) encryption_24(keys, m2)) ;
         // enc_msgs[key] =  ((u64_t) encryption_24(keys, m1)) ;
@@ -75,7 +73,6 @@ void attack(u32_t m1, u32_t enc1, u32_t m2, u32_t enc2){
     free(dec_keys);
     free(dec_msgs);
     free(keys);
-    free(keys_80);
 }
 
 

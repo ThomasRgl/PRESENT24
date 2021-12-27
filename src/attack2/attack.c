@@ -1,8 +1,9 @@
 
 #include "attack.h"
+// #include "../common.h"
 
 #define SIZE 0xffffff
-#define NBTHREAD 7
+#define NBTHREAD 10
 
 void attack(u32_t m1, u32_t enc1, u32_t m2, u32_t enc2){
     
@@ -108,7 +109,7 @@ void * threadAttack( void *voidArgs){
     //
     // u32_t key = args->start;
     for(u32_t key = args->start; key <= args->end;  key++){
-        keys = keyScheduling( key, keys, keys_80 );
+        keys = keyScheduling( key, keys );
         
         //
         enc_msgs[key] = ( ((u64_t) encryption_24(keys, m1)) << 32) | ((u64_t) encryption_24(keys, m2)) ;

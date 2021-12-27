@@ -1,0 +1,36 @@
+Source1 = "data/clang_div.txt"
+
+
+img1 = "img/parts.png"
+
+
+titre = "temps nécéssaire à chaque étape de l'attaque"
+
+set xtics ("encryption/decryption" 1, "Sorting" 2, "Comparing" 3, )
+
+
+##
+set datafile separator ","
+
+##
+set title titre
+set ylabel "temps (s)"
+
+
+
+##
+set terminal "png" size 700,500
+set output img1
+
+##
+#set yrange [1:10]
+set autoscale
+set boxwidth 0.5
+
+#
+set style fill solid
+
+#
+
+plot Source1 using ($1 ):($2) title "clang" with boxes,\
+

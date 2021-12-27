@@ -1,0 +1,58 @@
+Source1 = "data/gcc.txt"
+Source2 = "data/gcc0.txt"
+Source3 = "data/clang.txt"
+Source4 = "data/clang0.txt"
+
+
+img1 = "img/substitution.png"
+img2 = "img/substitution_opti.png"
+
+titre = "nombre de ticks cpu nécéssaire pour passer 2^{24} message dans un Sbox, \n en fonction du compilateur et de la fonction utilisée \n compilé sans flag d'optimisation"
+
+set xtics ("subsitution 8" 1, "subsitution 24" 3, )
+
+
+##
+set datafile separator ","
+
+##
+set title titre
+set ylabel "tick cpu"
+
+
+
+##
+set terminal "png" size 700,500
+set output img1
+
+##
+set yrange [1:500000]
+
+
+
+#
+set style fill solid
+
+#
+num_of_categories=2
+set boxwidth 1.0/num_of_categories
+dx=1.0/(num_of_categories*2)
+offset=0.05
+
+plot Source1 using ($1 - dx - offset):($2) title "gcc" with boxes,\
+     Source3 using ($1 + dx + offset):($2) title "clang" with boxes
+
+##
+
+set terminal "png" size 700,500
+set output img2
+
+
+set ylabel "tick cpu"
+set yrange [1:150000]
+
+titre = "nombre de ticks cpu nécéssaire pour passer 2^{24} message dans un Sbox, \n en fonction du compilateur et de la fonction utilisée \n compilée avec les flags d'optimisation suivant :\n -O3 -finline-functions -funroll-loops -march=native -mtune=native -flto -o"
+set title titre
+
+plot Source2 using ($1 - dx - offset):($2) title "gcc" with boxes,\
+     Source4 using ($1 + dx + offset):($2) title "clang" with boxes

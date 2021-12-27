@@ -54,4 +54,13 @@ dkms.conf
 docs
 docs/*
 builds/*
+
 .*
+
+
+rapport/*.toc
+rapport/*.aux
+rapport/*.fdb*
+rapport/*.fls
+rapport/*.log
+rapport/*.gz

@@ -1,5 +1,5 @@
-#ifndef ATTACK_H
-    #define ATTACK_H
+#ifndef ATTACK2_H
+    #define ATTACK2_H
 
     #include <time.h>
     #include <math.h>
@@ -11,6 +11,14 @@
 
     #include "../present/present.h"
     #include "../sort/sort.h"
+
+    // #ifdef  MAIN_FILE
+    // int NBTHREAD;
+    // #else
+    
+    // #endif
+
+    // extern int NBTHREAD;
 
     typedef struct thread_args
     {
@@ -35,6 +43,8 @@
 
     pthread_barrier_t barrier1;
     pthread_barrier_t barrier2;
+
+    
 
     void attack( u32_t m1, u32_t enc1, u32_t m2, u32_t enc2);
     void * threadAttack( void *voidArgs);
